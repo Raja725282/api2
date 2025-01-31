@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free Instagram Video Downloader - Download Instagram videos instantly with our AI-powered tool. High quality, fast and secure downloads.">
+    <meta name="keywords" content="instagram video downloader, download instagram videos, instagram reels downloader, instagram story downloader, social media tools">
+    <meta name="author" content="AI Video Downloader">
+    <meta property="og:title" content="AI Video Downloader - Download Instagram Videos Instantly">
+    <meta property="og:description" content="Download Instagram videos in high quality with our fast and secure AI-powered downloader. No registration required.">
+    <meta property="og:image" content="/static/images/preview.jpg">
+    <meta property="og:url" content="https://yourwebsite.com">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>AI Video Downloader - Download Instagram Videos Instantly</title>
+    <link rel="canonical" href="https://yourwebsite.com">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .download-button {
+            background-color: #0095f6; /* Solid background color */
+            color: white; /* Text color */
+            border: none; /* No border */
+            padding: 12px 20px; /* Padding for the button */
+            border-radius: 5px; /* Rounded corners */
+            font-size: 1rem; /* Font size */
+            cursor: pointer; /* Pointer cursor on hover */
+            transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+            margin-left: 224px;
+}
+        }
+        
+        .download-button:hover {
+            background-color: #00d1ff; /* Lighter shade on hover */
+            transform: scale(1.05); /* Slightly enlarge on hover */
+        }
+        
+        .download-button:active {
+            transform: scale(0.95); /* Slightly shrink on click */
+        }
+        :root {
+            --primary-color: #0095f6;
+            --secondary-color: #00d1ff;
+            --bg-color: #0a0a1f;
+            --text-color: #ffffff;
+            --accent-color: #6b21ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(10, 10, 31, 0.95);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+            min-height: calc(100vh - 160px);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(10, 10, 31, 0.8), rgba(107, 33, 255, 0.1));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: radial-gradient(circle, var(--accent-color) 0%, transparent 50%);
+            animation: rotate 30s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient 5s ease infinite;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .downloader-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-group {
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 15px rgba(0, 149, 246, 0.3);
+        }
+
+        .download-btn {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 1rem 0;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .download-btn i {
+            font-size: 1.2rem;
+        }
+
+        .download-btn:active {
+            transform: translateY(0);
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        #result {
+            margin-top: 2rem;
+            padding: 1rem;
+            border-radius: 8px;
+            display: none;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .success {
+            background: rgba(56, 142, 60, 0.1);
+            border: 1px solid rgba(56, 142, 60, 0.3);
+            color: #4caf50;
+        }
+
+        .error {
+            background: rgba(211, 47, 47, 0.1);
+            border: 1px solid rgba(211, 47, 47, 0.3);
+            color: #f44336;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .video-preview {
+            display: none;
+            margin: 2rem 0;
+            text-align: center;
+            animation: fadeIn 0.3s ease-in;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .video-preview img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            margin-bottom: 1rem;
+        }
+
+        .video-preview p {
+            color: var(--text-color);
+            margin: 1rem 0;
+        }
+
+        .download-progress {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            width: 0;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            transition: width 1s ease-in-out;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 4rem 2rem;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(10, 10, 31, 0.95);
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-links a {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        #downloadFrame {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* AI Animation Effects */
+        .ai-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        @keyframes particleFloat {
+            0% { transform: translateY(0) scale(1); opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { transform: translateY(-100px) scale(0); opacity: 0; }
+        }
+
+        .neural-path {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            opacity: 0.1;
+            background: 
+                linear-gradient(90deg, var(--primary-color) 1px, transparent 1px) 0 0 / 20px 20px,
+                linear-gradient(0deg, var(--primary-color) 1px, transparent 1px) 0 0 / 20px 20px;
+        }
+
+        /* Blog Section */
+        .blog-section {
+            padding: 4rem 0;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .blog-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+        }
+
+        .blog-date {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+        }
+
+        .blog-title {
+            margin: 0.5rem 0;
+            font-size: 1.2rem;
+            color: var(--text-color);
+        }
+
+        .blog-excerpt {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .read-more {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 4rem 0;
+            text-align: center;
+            background: linear-gradient(45deg, rgba(0, 149, 246, 0.1), rgba(0, 149, 246, 0.05));
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .stat-card {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-author {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .video-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .download-button {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 1rem 0;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .download-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .download-button i {
+            font-size: 1.2rem;
+        }
+
+        .download-button:active {
+            transform: translateY(0);
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            width: 0;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            transition: width 1s ease-in-out;
+        }
+
+        .progress-text {
+            color: var(--text-color);
+            font-size: 1rem;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="page1.html">Page 1</a></li>
+                <li><a href="page2.html">Page 2</a></li>
+                <li><a href="page3.html">Page 3</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>AI-Powered Instagram Video Downloader</h1>
+            <p>Download your favorite Instagram videos instantly with our advanced AI technology</p>
+        </section>
+
+        <section class="downloader-container">
+            <div class="input-group">
+                <input type="text" id="url" placeholder="Enter Instagram video URL">
+            </div>
+            <button id="download-button" class="download-button" onclick="handleSubmit(event)">
+                <i class="fas fa-download"></i> Download Video
+            </button>
+            <div class="loading">
+                <div class="loading-spinner"></div>
+                <p>Processing your video with AI...</p>
+            </div>
+            <div id="result"></div>
+            <div class="video-preview" id="videoPreview"></div>
+        </section>
+            <div class="progress-container" style="display: none;">
+                <div class="progress-bar"></div>
+                <span class="progress-text">Your video is now downloading...</span>
+            </div>
+        </div>
+
+        <section class="features" id="features">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-bolt feature-icon"></i>
+                    <h3>Lightning Fast</h3>
+                    <p>Download videos instantly with our optimized AI engine</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt feature-icon"></i>
+                    <h3>Secure Downloads</h3>
+                    <p>Your data is protected with advanced encryption</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-magic feature-icon"></i>
+                    <h3>AI Enhanced</h3>
+                    <p>Smart processing ensures highest quality downloads</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <h2>Our Impact</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" data-count="1000000">1M+</div>
+                    <div class="stat-label">Videos Downloaded</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-count="50000">50K+</div>
+                    <div class="stat-label">Happy Users</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-count="99">99%</div>
+                    <div class="stat-label">Success Rate</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section class="blog-section" id="blog">
+            <h2>Latest from Our Blog</h2>
+            <div class="blog-grid">
+                <article class="blog-card">
+                    <img src="https://picsum.photos/600/400" alt="Instagram Video Tips" class="blog-image">
+                    <div class="blog-content">
+                        <div class="blog-date">January 28, 2025</div>
+                        <h3 class="blog-title">Top 10 Instagram Video Tips for 2025</h3>
+                        <p class="blog-excerpt">Learn the latest trends and tips for creating engaging Instagram videos that capture your audience's attention.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+                <article class="blog-card">
+                    <img src="https://picsum.photos/600/401" alt="AI in Social Media" class="blog-image">
+                    <div class="blog-content">
+                        <div class="blog-date">January 25, 2025</div>
+                        <h3 class="blog-title">How AI is Revolutionizing Social Media</h3>
+                        <p class="blog-excerpt">Discover how artificial intelligence is transforming the way we create and consume social media content.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+                <article class="blog-card">
+                    <img src="https://picsum.photos/600/402" alt="Video Marketing Guide" class="blog-image">
+                    <div class="blog-content">
+                        <div class="blog-date">January 22, 2025</div>
+                        <h3 class="blog-title">Ultimate Guide to Video Marketing</h3>
+                        <p class="blog-excerpt">Master the art of video marketing with our comprehensive guide to creating, editing, and sharing videos.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials-section">
+            <h2>What Our Users Say</h2>
+            <div class="testimonial-slider">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"This is the fastest and most reliable Instagram video downloader I've ever used. The AI-powered features make it incredibly easy!"</p>
+                    <div class="testimonial-author">- Sarah Johnson</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Your Company. All rights reserved.</p>
+    </footer>
+
+    <iframe id="downloadFrame" name="downloadFrame"></iframe>
+
+    <script>
+        const resultDiv = document.getElementById('result');
+        const videoPreview = document.getElementById('videoPreview');
+        const downloadFrame = document.getElementById('downloadFrame');
+
+        async function handleSubmit(event) {
+            event.preventDefault();
+            const urlInput = document.getElementById('url');
+            const url = urlInput.value.trim();
+            
+            if (!url) {
+                showError('Please enter a valid Instagram video URL');
+                return;
+            }
+
+            // Reset UI
+            resultDiv.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            resultDiv.className = 'processing';
+            videoPreview.style.display = 'none';
+            
+            try {
+                // Phase 1: Prepare download and get thumbnail
+                const prepareResponse = await fetch('/prepare-download', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ url })
+                });
+                
+                const prepareData = await prepareResponse.json();
+                
+                if (prepareData.error) {
+                    resultDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> Error: ${prepareData.error}`;
+                    resultDiv.className = 'error';
+                    videoPreview.style.display = 'none';
+                    return;
+                }
+                
+                // Show video preview with thumbnail
+                videoPreview.innerHTML = `
+                    <img src="${prepareData.thumbnail_url}" alt="Video Preview">
+                    <p>Your video is ready for download!</p>
+                    <button id="downloadBtn" class="download-btn">
+                        <i class="fas fa-download"></i> Download Video
+                    </button>
+                    <div class="download-progress" style="display: none;">
+                        <div class="progress-bar"></div>
+                        <p>Downloading...</p>
+                    </div>
+                `;
+                videoPreview.style.display = 'block';
+                
+                // Update status
+                resultDiv.innerHTML = '<i class="fas fa-check-circle"></i> Video ready for download';
+                resultDiv.className = 'success';
+                
+                // Add click handler for download button
+                const downloadBtn = document.getElementById('downloadBtn');
+                downloadBtn.addEventListener('click', async () => {
+                    try {
+                        // Show progress
+                        downloadBtn.style.display = 'none';
+                        const progressDiv = videoPreview.querySelector('.download-progress');
+                        progressDiv.style.display = 'block';
+                        
+                        // Phase 2: Start actual download
+                        const downloadResponse = await fetch('/start-download', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ url })
+                        });
+                        
+                        const downloadData = await downloadResponse.json();
+                        
+                        if (downloadData.error) {
+                            throw new Error(downloadData.error);
+                        }
+                        
+                        // Animate progress bar
+                        const progressBar = progressDiv.querySelector('.progress-bar');
+                        progressBar.style.width = '100%';
+                        progressDiv.querySelector('p').textContent = 'Download complete!';
+                        
+                        // Start download
+                        downloadFrame.src = downloadData.download_url;
+                        
+                    } catch (error) {
+                        resultDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> Error: ${error.message}`;
+                        resultDiv.className = 'error';
+                        videoPreview.style.display = 'none';
+                    }
+                });
+                
+            } catch (error) {
+                resultDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> Error: ${error.message}`;
+                resultDiv.className = 'error';
+                videoPreview.style.display = 'none';
+            }
+        }
+
+        function showError(message) {
+            resultDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
+            resultDiv.className = 'error';
+            resultDiv.style.display = 'block';
+        }
+
+        // Add smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // AI Animation Effects
+        function createParticle(x, y) {
+            const particle = document.createElement('div');
+            particle.className = 'ai-particle';
+            particle.style.left = x + 'px';
+            particle.style.top = y + 'px';
+            document.body.appendChild(particle);
+
+            particle.style.animation = 'particleFloat 2s ease-out forwards';
+            setTimeout(() => particle.remove(), 2000);
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            if (Math.random() < 0.1) {
+                createParticle(e.clientX, e.clientY);
+            }
+        });
+
+        // Animate stats on scroll
+        const stats = document.querySelectorAll('.stat-number');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = parseInt(entry.target.dataset.count);
+                    animateNumber(entry.target, target);
+                }
+            });
+        });
+
+        stats.forEach(stat => observer.observe(stat));
+
+        function animateNumber(element, target) {
+            let current = 0;
+            const increment = target / 50;
+            const interval = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(interval);
+                }
+                element.textContent = Math.round(current).toLocaleString() + (target === 99 ? '%' : '+');
+            }, 50);
+        }
+
+        document.querySelector('.download-button').addEventListener('click', function() {
+            document.querySelector('.progress-container').style.display = 'block';
+            // Simulate download progress
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 10;
+                document.querySelector('.progress-bar').style.width = progress + '%';
+                if (progress >= 100) {
+                    clearInterval(interval);
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
